@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 
 /// Progress Dot Decoration
 DotsDecorator dotSDecoration = DotsDecorator(
-  size: const Size.square(10.0),
-  activeSize: const Size(16.0, 16.0),
-  activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-);
+    size: const Size.square(10.0),
+    activeSize: const Size(16.0, 16.0),
+    activeShape:
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+    activeColor: Colors.black87,
+    color: Colors.black54);
 
 /// Song Title Text Style
 TextStyle titleTextStyle =
-    TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 24);
+    TextStyle(color: Colors.black87, fontWeight: FontWeight.w700, fontSize: 24);
 
 /// Song Vocalist Text Style
 TextStyle singerTextStyle =
