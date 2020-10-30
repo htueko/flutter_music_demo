@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music_demo/service/audio_service.dart';
+import 'package:flutter_music_demo/view/ui_helper/shared_style.dart';
 import 'package:stacked/stacked.dart';
 
 import 'home_viewmodel.dart';
@@ -17,16 +18,14 @@ class HomeView extends StatelessWidget {
                 children: [
                   Column(
                     children: [
+                      /// Progress Dots Widget
                       DotsIndicator(
                         dotsCount: AudioData.allAudioData.length,
                         position: model.currentIndex.toDouble(),
-                        decorator: DotsDecorator(
-                          size: const Size.square(10.0),
-                          activeSize: const Size(16.0, 16.0),
-                          activeShape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                        ),
+                        decorator: dotSDecoration,
                       ),
+
+                      /// Image Slider with Slide function Widget
                       CarouselSlider.builder(
                         options: CarouselOptions(
                           enableInfiniteScroll: true,
@@ -45,39 +44,42 @@ class HomeView extends StatelessWidget {
                         ),
                         carouselController: model.carouselController,
                       ),
+
+                      /// Song Title Text Widget
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           AudioData.allAudioData[model.currentIndex].title,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 24),
+                          style: titleTextStyle,
                         ),
                       ),
+
+                      /// Song Vocalist Text Widget
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           AudioData.allAudioData[model.currentIndex].singer,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16),
+                          style: singerTextStyle,
                         ),
                       ),
                     ],
                   ),
+
+                  /// Control Group Widget (previous, play/pause, next)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      /// Previous Image Widget
                       InkWell(
                         child: Image.asset('assets/icon/ic_previous.png'),
                         onTap: () {
                           model.carouselController.previousPage();
                         },
                       ),
+
+                      /// Play/Pause Image Widget
                       InkWell(
                         child: (model.isPaused)
                             ? Image.asset('assets/icon/ic_play.png')
@@ -86,6 +88,8 @@ class HomeView extends StatelessWidget {
                           model.togglePlayPause();
                         },
                       ),
+
+                      /// Next Image Widget
                       InkWell(
                         child: Image.asset('assets/icon/ic_next.png'),
                         onTap: () {
@@ -94,11 +98,15 @@ class HomeView extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  /// Song Progress Widget
                   Slider(
                     value: model.currentProgress.toDouble(),
                     max: model.maxProgress.toDouble(),
                     onChanged: model.handleSliderValueChange,
                   ),
+
+                  /// Song Start Minute and Second and Song Total Minute and Second Widget
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: Row(
@@ -108,18 +116,12 @@ class HomeView extends StatelessWidget {
                         Text(
                           model.getCurrentProgressInMinuteAndSecond(),
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12),
+                          style: timeTextStyle,
                         ),
                         Text(
                           model.getMaxProgressInMinuteAndSecond(),
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12),
+                          style: timeTextStyle,
                         ),
                       ],
                     ),
