@@ -40,13 +40,10 @@ class HomeView extends StatelessWidget {
                         itemCount: AudioData.allAudioData.length,
                         itemBuilder: (BuildContext context, int itemIndex) =>
                             Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width,
-                              child: Image.asset(
-                                  AudioData.allAudioData[itemIndex].imageUrl),
-                            ),
+                          width: MediaQuery.of(context).size.width,
+                          child: Image.asset(
+                              AudioData.allAudioData[itemIndex].imageUrl),
+                        ),
                         carouselController: model.carouselController,
                       ),
                       verticalSpaceSmall,
@@ -108,7 +105,6 @@ class HomeView extends StatelessWidget {
                   /// Progress Indicator and Time Widget Group
                   Column(
                     children: [
-
                       /// Song Progress Widget
                       Slider(
                         value: model.currentProgress.toDouble(),
